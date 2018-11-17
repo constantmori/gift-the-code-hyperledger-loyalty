@@ -1,0 +1,104 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.clp.biznet
+
+//members identified by email
+participant Member identified by accountNumber {
+  o String accountNumber
+  o String firstName
+  o String email
+  o Integer pointsUsed
+  // o Integer pointsTotal
+  o String newValue
+  o String dailyReward optional
+}
+
+//partner identified by id
+participant Partner identified by id {
+  o String id
+  o String name
+}
+
+asset availableRewards {
+  --> Partner participant
+  o String Rewardid
+  o String promoPescription
+  o String "http://images.google.com/?q=lyftlogo.png"
+  o String promocode
+}
+
+// Member's Asset
+// asset PointsType identified by assetType 
+// getLoanForUserByStatus
+// getPointTypeRegistry
+asset Identity identified by identityId {    
+  o String identityId
+  o String name
+  o String issuer
+  o String certificate
+  o IdentityState state
+  --> Member participant
+}
+
+// Point Type Value
+// asset SampleAsset identified by assetId 
+// getPointTxRegistry
+asset assetValue identified by assetId { 
+  o String assetId
+  --> Member participant
+  o String value
+}
+
+// Point TX through Point Type
+transaction PointsTx identified by pointsValue {
+  --> assetValue asset
+  o String newValue
+}
+
+// TODO: 
+// Point type convert to point value
+// o String hashtag 
+// o String offPeak
+// o String newMember
+// o String dailyReward
+
+
+asset HistorianRecord identified by transactionId {
+  o String        transactionId
+  o String        transactionType
+  --> Transaction transactionInvoked
+  --> Participant participantInvoking  optional
+  --> Identity    identityUsed         optional
+  o Event[]       eventsEmitted        optional
+  o DateTime      transactionTimestamp
+}
+
+//points earned
+transaction EarnPoints {
+  o Integer points
+  o String newValue
+  --> Identity asset
+  --> Partner partner
+  --> Member member    
+}
+
+//points spent
+transaction UsePoints {
+  o Integer points
+  o String newValue
+  --> Identity asset
+  --> Partner partner  
+  --> Member member
+}

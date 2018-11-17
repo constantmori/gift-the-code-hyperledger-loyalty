@@ -1,0 +1,36 @@
+{
+	"engines": {
+		"composer": "latest"
+	},
+	"name": "clp-network",
+	"version": "0.0.1",
+	"description": "Customer Loyalty Program network",
+	"scripts": {
+		"prepublish": "composer archive create -t dir -n .",
+		"pretest": "npm run lint",
+		"lint": "eslint .",
+		"test": "nyc mocha -t 0 test/*.js && cucumber-js"
+	},
+	"keywords": [
+		"composer",
+		"composer-network"
+	],
+	"author": "Constant Mori",
+	"email": "constantmori@gmail.com",
+	"license": "Apache-2.0",
+	"devDependencies": {
+		"composer-admin": "latest",
+		"composer-cli": "latest",
+		"composer-client": "latest",
+		"composer-common": "latest",
+		"composer-connector-embedded": "latest",
+		"composer-cucumber-steps": "latest",
+		"chai": "latest",
+		"chai-as-promised": "latest",
+		"cucumber": "^2.2.0",
+		"eslint": "latest",
+		"nyc": "latest",
+		"mkdirp": "latest",
+		"mocha": "latest"
+	}
+}
