@@ -15,6 +15,8 @@ We conceptualize that coins could be awarded to users for various activities:
   - Attending a Movember themed event or gala
   - Other time-limited contests
 
+  <img src="docs/doc-images/webapp-home.png">
+
 # The Nitty Gritty
 
 ## Architecture
